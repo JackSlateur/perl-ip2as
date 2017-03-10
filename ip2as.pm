@@ -23,6 +23,10 @@ sub get_json {
 	read $fh, my $string, -s $fh;
 	close $fh;
 
+	if(length($string) == 0){
+		$string = '{}';
+	}
+
 	return decode_json($string);
 }
 
