@@ -1,41 +1,34 @@
-#!/usr/bin/python3.6
+#!/usr/bin/python3
 
 import sys
 import requests
 import json
 
-from pprint import pprint
-
 if len(sys.argv) != 2:
-	print(f'Usage: {sys.argv[0]} <asinfo.txt>')
+	print('Usage: %s <asinfo.txt>' % (sys.argv[0],))
 	sys.exit(1)
 
-with open(sys.argv[1], 'r') as f:
-	asn = f.readlines()
-	asn = [i.rstrip().split('\t')[0] for i in asn]
+asn = open(sys.argv[1], newline='').readlines()
+asn = [i.rstrip().split('\t')[0] for i in asn]
 
 for i in asn:
-	print(f'Fetching {i}..')
+	print('Fetching %s ..' % (i,))
 	try:
-		open(f'{i}.json', 'r')
+		open('%s.json' % (i,))
 		continue
 	except:
 		pass
-	data = requests.get(f'https://stat.ripe.net/data/announced-prefixes/data.json?resource=AS{i}')
+	data = requests.get('https://stat.ripe.net/data/announced-prefixes/data.json?resource=AS%s' % (i,))
 	data = data.json()['data']['prefixes']
 	data = [i['prefix'] for i in data]
-	with open(f'{i}.json', 'w') as f:
+	with open('%s.json' % (i,), 'w') as f:
 		f.write(json.dumps(data))
 
 result = {}
 for i in asn:
-	with open(f'{i}.json', 'r') as f:
-		data = f.readlines()
-		data = [i.rstrip() for i in data]
-	data = json.loads(data[0])
+	data = json.load(open('%s.json' % (i,)))
 	for prefix in data:
 		result[prefix] = i
 
 with open('ip2asn.json', 'w') as f:
 	f.write(json.dumps(result))
-
