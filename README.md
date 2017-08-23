@@ -6,6 +6,7 @@ ip2as is a small perl module to help map IP adresses to ASN. Both IP version are
 Prerequisites
 ---
 
+ - Perl (5.20 required)
  - libnet-patricia-perl
  - libjson-xs-perl (optional, you should use it)
 
