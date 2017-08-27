@@ -45,7 +45,7 @@ sub get_lookup {
 	my $v6 = new Net::Patricia AF_INET6;
 
 	foreach my $key(keys %$data){
-		my $value = %$data{$key};
+		my $value = ${$data}{$key};
 		my @split = split('/', $key);
 		if(is_v4(shift(@split))){
 			$v4->add_string($key, $value);
