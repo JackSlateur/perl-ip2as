@@ -34,4 +34,4 @@ print ip2as::getas4ip('::') . "\n"; #prints 29049
 print ip2as::getas4ip('10.0.0.1') . "\n"; #prints 15576
 ```
 
-As you see, AS29049 origins ::/0 and AS15576 origins 0.0.0.0/0 .. :)
+That specific issue is now fixed (by static exclusion), it remains sensitive to bad data.

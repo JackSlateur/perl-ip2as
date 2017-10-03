@@ -18,7 +18,7 @@ def work(asn):
 
 	data = requests.get(url % (asn,))
 	data = data.json()['data']['prefixes']
-	data = [i['prefix'] for i in data]
+	data = [i['prefix'] for i in data if i['prefix'] != '0.0.0.0/0' and i['prefix'] != '::/0']
 	with open('%s.json' % (asn,), 'w') as f:
 		f.write(json.dumps(data))
 
