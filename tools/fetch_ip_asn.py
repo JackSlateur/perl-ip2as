@@ -11,7 +11,7 @@ url = r'https://stat.ripe.net/data/announced-prefixes/data.json?resource=AS%s'
 def work(asn):
 	print('Fetching %s ..' % (asn,))
 	try:
-		open('%s.json' % (i,))
+		open('%s.json' % (asn,))
 		return
 	except:
 		pass
